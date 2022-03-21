@@ -8,7 +8,7 @@ mysock.connect(("data.pr4e.org", 80))
 
 # send the command
 cmd = (
-    "GET http://data.pr4e.org/panel.htm HTTP/1.0\r\n\r\n".encode()
+    "GET http://data.pr4e.org/page1.htm HTTP/1.0\r\n\r\n".encode()
 )  # encode it to convert the Python Unicode string to UTF-8
 mysock.send(cmd)
 
