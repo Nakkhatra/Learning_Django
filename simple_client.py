@@ -7,7 +7,9 @@ try:
         ("127.0.0.1", 9000)
     )  ## 127.0.0.1 is the ipv4 for loopback right to the host/ localhost ip address
 
-    cmd = "GET http://127.0.0.1/sample.txt HTTP/1.0\r\n\r\n".encode()
+    cmd = (
+        "GET http://127.0.0.1/sample.txt HTTP/1.0\r\n\r\n".encode()
+    )  # Question: http://127.0.0.1/sample.txt actually contains nothing, but still how is the request a valid one and working????
     mysock.send(cmd)
 
     while True:
