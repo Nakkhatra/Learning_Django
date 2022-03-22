@@ -24,13 +24,12 @@ def createServer():
             rd = clientsocket.recv(
                 5000
             ).decode()  # This is the counterpart of the .send() request from the client/ browser, here the server receives what the client is requesting in UTF-8 and decodes to Unicode for reading in python
-            pieces = rd.split(
-                "\n"
-            )  # As the format of the response usually contains metadata (containing headers) at the beginning, then a new line and then the html script/ document: So we are splitting the first part (metadata) and the html script or document into two pieces by using delimiter "\n"
+            pieces = rd.split("\n")  # See doc string at the very end
 
             # So pieces[0] is the metadata and pieces[1] is the html script/ document
 
             if len(pieces[0]) > 0:
+                # print(rd)
                 print(pieces[0])  # Just printing the metadata/ headers
 
             data = "HTTP/1.1 200 OK\r\n"  # Adding response confirmation, if requested document is not found, there will be 404 not found
@@ -58,3 +57,23 @@ def createServer():
 
 print("Access http://localhost:9000")
 createServer()
+
+
+# NOTE: This is what the server receives which is sent from the client side: We are printing only the first line by splitting the whole thing with \n as delimiter
+"""
+GET / HTTP/1.1
+Host: localhost:9000
+Connection: keep-alive
+sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="98", "Google Chrome";v="98"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Linux"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9,bn-BD;q=0.8,bn;q=0.7
+"""
